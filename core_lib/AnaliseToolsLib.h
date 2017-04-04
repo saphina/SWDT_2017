@@ -1,21 +1,27 @@
-/*Данный заголовочный файл определяет функции, которые используются в процессе анализа музыкальной композиции.
-*/
+/* Данный заголовочный файл определяет функции, которые используются 
+в процессе анализа музыкальной композиции. */
 #include <string.h>
 #include <stdio.h>
 #include <math.h>
-#include "stdafx.h"
 #include <conio.h>
+
+#ifndef ANALISE_TOOL_H_
+#define ANALISE_TOOL_H_
 
 typedef unsigned short WORD;
 typedef unsigned int DWORD;
 typedef short INT16;
 
+const int N = 4; // Field size in bytes.
+
 struct wav_header_t
 {
-	char rId[4]; //"RIFF" = 0x46464952
-	DWORD rLen; //28 [+ sizeof(wExtraFormatBytes) + wExtraFormatBytes] + sum(sizeof(chunk.id) + sizeof(chunk.size) + chunk.size)
-	char wId[4]; //"WAVE" = 0x45564157
-	char fId[4]; //"fmt " = 0x20746D66
+	char rId[N]; //"RIFF" = 0x46464952
+	DWORD rLen; /* 28 [+ sizeof(wExtraFormatBytes) + 
+				+ wExtraFormatBytes] + sum(sizeof(chunk.id) + 
+				+ sizeof(chunk.size) + chunk.size) */
+	char wId[N]; //"WAVE" = 0x45564157
+	char fId[N]; //"fmt " = 0x20746D66
 	DWORD fLen; //16 [+ sizeof(wExtraFormatBytes) + wExtraFormatBytes]
 	WORD wFormatTag;
 	WORD nChannels;
@@ -29,11 +35,12 @@ struct wav_header_t
 
 struct chunk_t
 {
-	char id[4]; //"data" = 0x61746164
+	char id[N]; //"data" = 0x61746164
 	DWORD size;
 	//Chunk data bytes
 };
 
-DWORD* GetAmplitude(char* ,int*);
-bool FFT(DWORD*,int,float*);
-bool SearchMusic(float*,char*);
+DWORD *GetAmplitude(char *FPath, int *SamplesCount);
+bool SearchMusic(double *frequences, double *amplitudes, char *CompositionName);
+
+#endif
