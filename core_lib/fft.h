@@ -7,7 +7,7 @@
 
 #ifndef FFT_H_
 #define FFT_H_
-
+#define M_PI (3.1415926535897932384626433832795)
 struct Complex;
 struct ShortComplex;
 
