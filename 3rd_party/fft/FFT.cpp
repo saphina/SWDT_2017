@@ -4,7 +4,6 @@
     Coded by Miroslav Voinarovsky, 2006
     This source is freeware.    
 */
-#include "StdAfx.h"
 #include <math.h>
 #include "fft.h"
 
