@@ -54,6 +54,6 @@ bool AnalyseMusic(char *FPath, double *&FrequencesPeaks,
 	//амплитуд и частот, полученных от БПФ, указатели на массив пиков амплитуд с
 	//соответствующей частотой, указатель на переменную количества пиков и количество
 	//отсчетов после БПФ.
-        piki(Amplitudes, Frequences, AmplitudesPeaks, FrequencesPeaks, PeaksCount, SamplesCount/2);
+	piki(Amplitudes, Frequences, AmplitudesPeaks, FrequencesPeaks, PeaksCount, SamplesCount/2);
 	return true;
 }
