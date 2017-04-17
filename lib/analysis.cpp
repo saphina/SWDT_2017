@@ -26,6 +26,8 @@ bool analysis (float* x, float* y, float* p, float* r, int n, int l)	//x, y - Аи
 {																		//n - кол-во пиков трэка в базе, l - кол-во пиков текущего трэка
 int i, flag;
 float m, k;
+if (l==0) print("Мелодия не задана");	//Если пиков нет
+else
 if ((l-n<10)&&(n-l<10))		//если разность пиков меньше 10
 {
  print("Количество пиков похоже ");
