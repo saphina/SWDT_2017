@@ -6,7 +6,8 @@
 /* Данная функция производит подготовку данных для передачи в функция БПФ. */
 ShortComplex *FFTDataPreparetion(int SamplesCount, uint32_t *Amp)
 {
-	ShortComplex *NAmp = (ShortComplex*)malloc(SamplesCount*sizeof(ShortComplex));
+	ShortComplex *NAmp = 
+	    (ShortComplex*)malloc(SamplesCount*sizeof(ShortComplex));
 	//Запись значений амплитуд в вещественную часть массива комплексных чисел.
 	for(int i = 0; i<SamplesCount; i++)
 	{
@@ -20,7 +21,8 @@ ShortComplex *FFTDataPreparetion(int SamplesCount, uint32_t *Amp)
 функция принимает путь к файлу .WAV, пустой указатель на массив пиков
 частот, пустой указатель на массив пиков амплитуд и указатель на 
 количество пиков. */
-bool AnalyseMusic(char *FPath, double *&FrequencesPeaks, double *&AmplitudesPeaks, int *PeaksCount){
+bool AnalyseMusic(char *FPath, double *&FrequencesPeaks,
+                 double *&AmplitudesPeaks, int *PeaksCount){
 	//Массив амплитуд
 	uint32_t *Amp = NULL;
 	//Счетчик сэмплов
