@@ -50,7 +50,10 @@ bool AnalyseMusic(char *FPath, double *&FrequencesPeaks,
 	{
 		printf("Get_Freq_Amp error\n");
 	}
-	//ДОБАВИТЬ ФУНКЦИЮ ВЫДЕЛЕНИЯ ПИКОВ
-	*PeaksCount = SamplesCount/2;
+	//Вызов функции выделения пиков. В качестве параметров передается два массива
+	//амплитуд и частот, полученных от БПФ, указатели на массив пиков амплитуд с
+	//соответствующей частотой, указатель на переменную количества пиков и количество
+	//отсчетов после БПФ.
+    piki(Amplitudes, Frequences, AmplitudesPeaks, FrequencesPeaks, PeaksCount, SamplesCount/2);
 	return true;
 }
