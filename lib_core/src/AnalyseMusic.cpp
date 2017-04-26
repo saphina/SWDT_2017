@@ -7,13 +7,13 @@
 #define Mem_alloc_Comp(Pointer, Num) Pointer = (ShortComplex*)malloc(Num*sizeof(ShortComplex))
 #define Mem_alloc_Double(Pointer, Num) Pointer = (double*)malloc(((Num+1)/2)*sizeof(double));
 
-/* Данная функция производит подготовку данных для передачи в функция БПФ. */
+/* Р”Р°РЅРЅР°СЏ С„СѓРЅРєС†РёСЏ РїСЂРѕРёР·РІРѕРґРёС‚ РїРѕРґРіРѕС‚РѕРІРєСѓ РґР°РЅРЅС‹С… РґР»СЏ РїРµСЂРµРґР°С‡Рё РІ С„СѓРЅРєС†РёСЏ Р‘РџР¤. */
 ShortComplex *FFTDataPreparetion(int SamplesCount, uint32_t *Amp)
 {
     //ShortComplex *NAmp = (ShortComplex*)malloc(SamplesCount*sizeof(ShortComplex));
     ShortComplex *NAmp;
     Mem_alloc_Comp(NAmp, SamplesCount);
-    //Запись значений амплитуд в вещественную часть массива комплексных чисел.
+    //Р—Р°РїРёСЃСЊ Р·РЅР°С‡РµРЅРёР№ Р°РјРїР»РёС‚СѓРґ РІ РІРµС‰РµСЃС‚РІРµРЅРЅСѓСЋ С‡Р°СЃС‚СЊ РјР°СЃСЃРёРІР° РєРѕРјРїР»РµРєСЃРЅС‹С… С‡РёСЃРµР».
     for(int i = 0; i < SamplesCount; ++i)
     {
         NAmp[i].re = (double)Amp[i];
@@ -22,30 +22,30 @@ ShortComplex *FFTDataPreparetion(int SamplesCount, uint32_t *Amp)
     return NAmp;
 }
 
-/* Данная функция производит анализ композиции. В качестве аргументов
-функция принимает путь к файлу .WAV, пустой указатель на массив пиков
-частот, пустой указатель на массив пиков амплитуд и указатель на 
-количество пиков. */
+/* Р”Р°РЅРЅР°СЏ С„СѓРЅРєС†РёСЏ РїСЂРѕРёР·РІРѕРґРёС‚ Р°РЅР°Р»РёР· РєРѕРјРїРѕР·РёС†РёРё. Р’ РєР°С‡РµСЃС‚РІРµ Р°СЂРіСѓРјРµРЅС‚РѕРІ
+С„СѓРЅРєС†РёСЏ РїСЂРёРЅРёРјР°РµС‚ РїСѓС‚СЊ Рє С„Р°Р№Р»Сѓ .WAV, РїСѓСЃС‚РѕР№ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РјР°СЃСЃРёРІ РїРёРєРѕРІ
+С‡Р°СЃС‚РѕС‚, РїСѓСЃС‚РѕР№ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РјР°СЃСЃРёРІ РїРёРєРѕРІ Р°РјРїР»РёС‚СѓРґ Рё СѓРєР°Р·Р°С‚РµР»СЊ РЅР° 
+РєРѕР»РёС‡РµСЃС‚РІРѕ РїРёРєРѕРІ. */
 bool AnalyseMusic(char *FPath, double *&FrequencesPeaks, double *&AmplitudesPeaks, int *PeaksCount){
-    //Массив амплитуд
+    //РњР°СЃСЃРёРІ Р°РјРїР»РёС‚СѓРґ
     uint32_t *Amp = NULL;
-    //Счетчик сэмплов
+    //РЎС‡РµС‚С‡РёРє СЃСЌРјРїР»РѕРІ
     int SamplesCount;
-    //Вычисление амплитуд
+    //Р’С‹С‡РёСЃР»РµРЅРёРµ Р°РјРїР»РёС‚СѓРґ
     Amp = GetAmplitude(FPath, &SamplesCount);
     if(Amp == NULL)
     {
         return false;
     }
-    //Подготовка данных к преобразованию Фурье
+    //РџРѕРґРіРѕС‚РѕРІРєР° РґР°РЅРЅС‹С… Рє РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёСЋ Р¤СѓСЂСЊРµ
     ShortComplex *NAmp = FFTDataPreparetion(SamplesCount, Amp);
     if(NAmp == NULL)
     {
         return false;
     }
-    //Преобразование Фурье
+    //РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ Р¤СѓСЂСЊРµ
     universal_fft(NAmp,SamplesCount,false);
-    //Получение частот и амплитуд из данных БПФ
+    //РџРѕР»СѓС‡РµРЅРёРµ С‡Р°СЃС‚РѕС‚ Рё Р°РјРїР»РёС‚СѓРґ РёР· РґР°РЅРЅС‹С… Р‘РџР¤
     //double *Frequences = (double*)malloc(((SamplesCount+1)/2)*sizeof(double));
     double *Frequences, *Amplitudes;
     Mem_alloc_Double(Frequences, SamplesCount);
@@ -55,7 +55,7 @@ bool AnalyseMusic(char *FPath, double *&FrequencesPeaks, double *&AmplitudesPeak
     {
         return false;
     }
-    //ДОБАВИТЬ ФУНКЦИЮ ВЫДЕЛЕНИЯ ПИКОВ
+    //Р”РћР‘РђР’РРўР¬ Р¤РЈРќРљР¦РР® Р’Р«Р”Р•Р›Р•РќРРЇ РџРРљРћР’
     *PeaksCount = SamplesCount/2;
     return true;
 }
