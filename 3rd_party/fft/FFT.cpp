@@ -5,6 +5,7 @@
     This source is freeware.    
 */
 #include <math.h>
+
 #include "fft.h"
 
 // This array contains values from 0 to 255 with reverse bit order
@@ -47,41 +48,41 @@ static unsigned char reverse256[]= {
 static long double temp;
 inline void operator+=(ShortComplex &x, const Complex &y)
 {
-	x.re += (double)y.re;
-	x.im += (double)y.im;
+    x.re += (double)y.re;
+    x.im += (double)y.im;
 }
 inline void operator-=(ShortComplex &x, const Complex &y)
 {
-	x.re -= (double)y.re;
-	x.im -= (double)y.im;
+    x.re -= (double)y.re;
+    x.im -= (double)y.im;
 }
 inline void operator*=(Complex &x,        const Complex &y)
 {
-	temp = x.re;
-	x.re = temp  *y.re - x.im  *y.im;
-	x.im = temp  *y.im + x.im  *y.re;
+    temp = x.re;
+    x.re = temp  *y.re - x.im  *y.im;
+    x.im = temp  *y.im + x.im  *y.re;
 }
 inline void operator*=(Complex &x,        const ShortComplex &y)
 {
-	temp = x.re;
-	x.re = temp  *y.re - x.im  *y.im;
-	x.im = temp  *y.im + x.im  *y.re;
+    temp = x.re;
+    x.re = temp  *y.re - x.im  *y.im;
+    x.im = temp  *y.im + x.im  *y.re;
 }
 inline void operator/=(ShortComplex &x, double div)
 {
-	x.re /= div;
-	x.im /= div;
+    x.re /= div;
+    x.im /= div;
 }
 inline void operator/=(Complex &x, double div)
 {
-	x.re /= div;
-	x.im /= div;
+    x.re /= div;
+    x.im /= div;
 }
 inline void operator*=(ShortComplex&x, const ShortComplex &y)
 {
-	double temp = x.re;
-	x.re = temp  *y.re - x.im  *y.im;
-	x.im = temp  *y.im + x.im  *y.re;
+    double temp = x.re;
+    x.re = temp  *y.re - x.im  *y.im;
+    x.im = temp  *y.im + x.im  *y.re;
 }
 
 
@@ -143,8 +144,8 @@ static ShortComplex *createWstore(unsigned int Nmax)
     Wstore[0].im = 0.0;
 
     for(N = 4, pWN = W2n + 1, Skew = Skew2 >> 1; 
-		N <= Nmax; 
-		N += N, pWN++, Skew2 = Skew, Skew >>= 1)
+        N <= Nmax; 
+        N += N, pWN++, Skew2 = Skew, Skew >>= 1)
     {
         //WN = W(1, N) = exp(-2*pi*j/N)
         WN= *pWN; 
@@ -155,7 +156,7 @@ static ShortComplex *createWstore(unsigned int Nmax)
 }
 
 static void fft_step(ShortComplex *x, unsigned int T, 
-	bool complement, const ShortComplex *Wstore)
+    bool complement, const ShortComplex *Wstore)
 {
     unsigned int Nmax, I, J, N, Nd2, k, m, Skew, mpNd2, Step;
     unsigned char *Ic = (unsigned char*) &I;
@@ -184,8 +185,8 @@ static void fft_step(ShortComplex *x, unsigned int T,
 
     //main loop
     for(N = 2, Nd2 = 1, Skew = Nmax >> 1, Step= 1; 
-		N <= Nmax; 
-		Nd2 = N, N += N, Skew >>= 1, Step++)
+        N <= Nmax; 
+        Nd2 = N, N += N, Skew >>= 1, Step++)
     {
         for(Warray = Wstore, k = 0; k < Nd2; k++, Warray += Skew)
         {

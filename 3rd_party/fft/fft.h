@@ -19,7 +19,6 @@ struct ShortComplex;
 			  true - reverse transformation 
 */
 extern void universal_fft(ShortComplex *x, int N, bool complement);
-bool Get_Freq_Amp(ShortComplex *arr, double *freq, double *amp, int N);
 
 struct ShortComplex
 {
@@ -37,8 +36,8 @@ struct Complex
 
 inline void ShortComplex::operator=(const Complex &y) 
 {
-	re = (double)y.re;
-	im = (double)y.im;
+    re = (double)y.re;
+    im = (double)y.im;
 }
 inline void Complex::operator= (const Complex &y)
 {
@@ -47,8 +46,8 @@ inline void Complex::operator= (const Complex &y)
 }
 inline void Complex::operator= (const ShortComplex &y)
 {
-	re = y.re;
-	im = y.im;
+    re = y.re;
+    im = y.im;
 }
 
 #endif
